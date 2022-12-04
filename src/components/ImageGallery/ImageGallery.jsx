@@ -28,7 +28,7 @@ export class ImageGallery extends Component {
 
   render() {
     const { isOpen } = this.state;
-    const { imeges, incrimentpage } = this.props;
+    const { imeges, incrimentpage, status } = this.props;
 
     return (
       <>
@@ -36,9 +36,11 @@ export class ImageGallery extends Component {
           <ul className={css.ImageGallery} onClick={this.handelImgClick}>
             <ImageGalleryItem imeges={imeges} />
           </ul>
-          <div className={css.loadMore}>
-            <Button incrimentpage={incrimentpage} />
-          </div>
+          {status === 'resolved' && (
+            <div className={css.loadMore}>
+              <Button incrimentpage={incrimentpage} />
+            </div>
+          )}
         </div>
 
         {isOpen && (

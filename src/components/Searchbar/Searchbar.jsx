@@ -3,33 +3,32 @@ import css from './Searchbar.module.css';
 
 export class Searchbar extends Component {
   state = {
-    sourceName: '',
-    page: 1,
+    inputValue: '',
   };
 
   onHendelInput = e => {
-    this.setState({ sourceName: e.currentTarget.value.toLowerCase() });
+    this.setState({ inputValue: e.currentTarget.value.toLowerCase() });
   };
 
   submit = e => {
     e.preventDefault();
-    const { sourceName, page } = this.state;
+
+    const { inputValue } = this.state;
     const { hendelFormSubmit } = this.props;
 
-    if (sourceName.trim() === '') {
+    if (inputValue.trim() === '') {
       return;
     }
 
-    hendelFormSubmit(sourceName, page);
+    hendelFormSubmit(inputValue);
 
     this.setState({
-      sourceName: '',
-      page: 1,
+      inputValue: '',
     });
   };
 
   render() {
-    const { sourceName } = this.state;
+    const { inputValue } = this.state;
 
     return (
       <header className={css.searchbar}>
@@ -45,7 +44,7 @@ export class Searchbar extends Component {
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
-            value={sourceName}
+            value={inputValue}
           />
         </form>
       </header>

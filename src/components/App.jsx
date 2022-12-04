@@ -10,7 +10,6 @@ export class App extends Component {
     sourceName: '',
     imeges: [],
     page: 1,
-    // error: null,
     status: 'idel',
   };
 
@@ -45,8 +44,8 @@ export class App extends Component {
     }
   }
 
-  hendelFormSubmit = (sourceName, page) => {
-    this.setState({ sourceName, page });
+  hendelFormSubmit = sourceName => {
+    this.setState({ sourceName, imeges: [], page: 1 });
   };
 
   incrimentpage = e => {
@@ -62,9 +61,12 @@ export class App extends Component {
       <div className={css.App}>
         <Searchbar hendelFormSubmit={this.hendelFormSubmit} />
 
-        {status === 'resolved' && (
-          <ImageGallery imeges={imeges} incrimentpage={this.incrimentpage} />
-        )}
+        <ImageGallery
+          status={status}
+          imeges={imeges}
+          incrimentpage={this.incrimentpage}
+        />
+
         {status === 'panding' && <Loader />}
       </div>
     );
